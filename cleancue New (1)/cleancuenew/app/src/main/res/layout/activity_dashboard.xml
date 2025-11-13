@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Dashboard Screen Layout
+    Author: Gemini
+    Date: 2024-10-15
+
+    Description:
+    This layout represents the main dashboard for an admin user.
+    It features:
+    - A 2x2 grid of MaterialCardView components for displaying key stats.
+    - A bottom navigation bar with quick action buttons.
+    - Uses ConstraintLayout for a responsive and flexible UI.
+    - Icons are sourced from Android's built-in drawable library.
+
+    Notes for implementation:
+    - Replace the placeholder values in `android:text` with data from your backend/ViewModel.
+    - The background for the bottom navigation bar still uses a custom drawable.
+      You can replace `@drawable/bottom_nav_background` with a simple color if you wish to remove all custom drawables.
+    - For best practice, extract all string literals, dimensions, and colors into
+      `strings.xml`, `dimens.xml`, and `colors.xml` respectively.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".DashboardActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient">
+
+
+    <!-- Screen Title -->
+
+    <!-- Grid containing the summary cards -->
+    <TextView
+        android:id="@+id/tv_dashboard_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:drawablePadding="8dp"
+        android:text="Dashboard"
+        android:textColor="#1A202C"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:drawableStartCompat="@android:drawable/ic_dialog_dialer"
+        app:drawableTint="#1A202C"
+        app:layout_constraintStart_toStartOf="@id/dashboard_grid"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <GridLayout
+        android:id="@+id/dashboard_grid"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:columnCount="2"
+        android:rowCount="2"
+        android:useDefaultMargins="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_dashboard_title"
+        app:layout_constraintWidth_percent="0.9">
+
+        <!-- Card 1: Total Orders -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Icon for Total Orders -->
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="4dp"
+                    android:src="@android:drawable/btn_default_small"
+                    app:tint="#4299E1"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Total Orders"
+                    android:textColor="#718096"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_total_orders_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="142"
+                    android:textColor="#1A202C"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card 2: In Progress -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Icon for In Progress -->
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="4dp"
+                    android:src="@android:drawable/ic_popup_sync"
+                    app:tint="#ED8936"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="In Progress"
+                    android:textColor="#718096"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_in_progress_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12"
+                    android:textColor="#1A202C"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card 3: Ready for Pickup -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Icon for Ready for Pickup -->
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="4dp"
+                    android:src="@android:drawable/arrow_up_float"
+                    app:tint="#48BB78"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Ready for Pickup"
+                    android:textColor="#718096"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_ready_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9"
+                    android:textColor="#1A202C"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card 4: Delivered -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Icon for Delivered -->
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="4dp"
+                    android:src="@android:drawable/ic_menu_send"
+                    app:tint="#9F7AEA"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Delivered"
+                    android:textColor="#718096"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_delivered_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="121"
+                    android:textColor="#1A202C"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </GridLayout>
+
+    <!-- Live Laundry Status Tile -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/live_laundry_tile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation_bar"
+        app:layout_constraintEnd_toEndOf="@id/dashboard_grid"
+        app:layout_constraintStart_toStartOf="@id/dashboard_grid"
+        app:layout_constraintTop_toBottomOf="@id/dashboard_grid"
+        app:layout_constraintVertical_bias="0.2">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie_washing_machine"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/clean_animation" />
+
+            <TextView
+                android:id="@+id/tv_live_status_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Currently Running Laundries"
+                android:textColor="#1A202C"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/lottie_washing_machine"
+                app:layout_constraintTop_toTopOf="@id/lottie_washing_machine" />
+
+            <TextView
+                android:id="@+id/tv_live_status_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="3 machines active"
+                android:textColor="#718096"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/tv_live_status_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_live_status_title" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Shadow for the Bottom Navigation Bar -->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bottom_nav_shadow"
+        app:layout_constraintBottom_toBottomOf="@id/bottom_navigation_bar"
+        app:layout_constraintEnd_toEndOf="@id/bottom_navigation_bar"
+        app:layout_constraintStart_toStartOf="@id/bottom_navigation_bar"
+        app:layout_constraintTop_toTopOf="@id/bottom_navigation_bar" />
+
+    <LinearLayout
+        android:id="@+id/bottom_navigation_bar"
+        android:layout_width="0dp" android:layout_height="wrap_content" android:orientation="horizontal"
+        android:background="@drawable/bottom_nav_background"
+        android:layout_marginBottom="16dp" android:elevation="10dp" android:paddingVertical="8dp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintWidth_percent="0.9">
+
+        <!-- Item 1: Add New Order -->
+        <LinearLayout
+            android:id="@+id/btn_add_order"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_add"
+                app:tint="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Add New"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Item 2: View All Orders -->
+        <LinearLayout
+            android:id="@+id/btn_view_orders"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_view"
+                app:tint="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="All Orders"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Item 3: Notifications -->
+        <LinearLayout
+            android:id="@+id/btn_notifications"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_dialog_info"
+                app:tint="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Notifications"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Item 4: Profile -->
+        <LinearLayout
+            android:id="@+id/btn_profile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_myplaces"
+                app:tint="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Profile"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

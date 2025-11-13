@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Add New Order Screen Layout
+    Author: Gemini
+    Date: 2024-10-15
+
+    Description:
+    This layout provides a form for staff to create a new customer order.
+    It features:
+    - Material Design components for input fields, including text, numbers, and a dropdown.
+    - CardView to group the input form for better visual structure.
+    - Clear action buttons at the bottom.
+
+    Notes for implementation:
+    - The Order ID field is set to be non-focusable (`android:focusable="false"`),
+      assuming it will be auto-generated. Change this if manual entry is needed.
+    - The "Current Status" dropdown needs to be populated programmatically
+      (e.g., using an ArrayAdapter in your Activity/Fragment).
+    - Implement click listeners for the date fields to show a DatePickerDialog.
+    - As before, it's best practice to extract strings, dimensions, and colors into resource files.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    tools:context=".AddOrderActivity">
+
+    <!-- Screen Title -->
+
+    <!-- ScrollView to ensure the form is scrollable on smaller screens -->
+    <TextView
+        android:id="@+id/tv_add_order_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="36dp"
+        android:drawableStart="@android:drawable/ic_menu_add"
+        android:drawablePadding="5dp"
+        android:drawableTint="@android:color/black"
+        android:text="Add New Order"
+        android:textColor="#1A202C"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/tv_add_order_title"
+        app:layout_constraintBottom_toTopOf="@id/btn_save_order"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp">
+
+            <!-- Customer Name -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Customer Name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_customer_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapWords" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Mobile Number -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Mobile Number">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_mobile_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Order ID -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Order ID (Auto-Generated)">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_order_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:text="ORD-143"
+                    tools:ignore="HardcodedText" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Item Details -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Item Details (e.g., 2 Shirts, 1 Pant)">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_item_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"
+                    android:lines="3" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Order & Delivery Dates -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <!-- Order Date -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@android:drawable/ic_menu_today"
+                    android:hint="Order Date">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_order_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="date" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Delivery Date -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@android:drawable/ic_menu_today"
+                    android:hint="Delivery Date">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_delivery_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="date" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <!-- Current Status (Spinner) -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Current Status">
+
+                <AutoCompleteTextView
+                    android:id="@+id/actv_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    tools:ignore="LabelFor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <!-- Save Order Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_save_order"
+        style="@style/Widget.Material3.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#2196F3"
+        android:paddingVertical="14dp"
+        android:text="Save Order"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_send_notification"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Send Notification Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_send_notification"
+        style="@style/Widget.Material3.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#2196F3"
+        android:paddingVertical="14dp"
+        android:text="Send Notification"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
